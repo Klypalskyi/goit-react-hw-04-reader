@@ -1,8 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import styles from './PostReader.module.css';
+import styles from './Reader.module.css';
+import Publication from '../Publication/Publication';
+import Counter from '../Counter/Counter';
+import Controls from '../Controls/Controls';
 
-class PostReader extends PureComponent {
+class Reader extends PureComponent {
   constructor({ items }) {
     super({ items });
     this.state = {
@@ -37,39 +40,32 @@ class PostReader extends PureComponent {
     const { pagerMax, currentPage, publication } = this.state;
     return (
       <div className={styles.reader}>
-        <article className={styles.publication}>
-          <h2>{items[publication].title}</h2>
-          <p>{items[publication].text}</p>
-        </article>
+        <Publication
+          cls={styles.publication}
+          items={items}
+          publication={publication}
+        />
 
-        <p className={styles.counter}>
-          {currentPage} / {pagerMax}
-        </p>
+        <Counter
+          cls={styles.counter}
+          currentPage={currentPage}
+          pagerMax={pagerMax}
+        />
 
-        <section className={styles.controls}>
-          <button
-            type="button"
-            className={styles.button}
-            onClick={this.handlePrevious}
-            disabled={currentPage === 1}
-          >
-            Previous
-          </button>
-          <button
-            type="button"
-            className={styles.button}
-            onClick={this.handleNext}
-            disabled={currentPage === pagerMax}
-          >
-            Next
-          </button>
-        </section>
+        <Controls
+          cls={styles.controls}
+          clsbtn={styles.button}
+          handlePrevious={this.handlePrevious}
+          handleNext={this.handleNext}
+          currentPage={currentPage}
+          pagerMax={pagerMax}
+        />
       </div>
     );
   }
 }
 
-PostReader.propTypes = {
+Reader.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -79,4 +75,4 @@ PostReader.propTypes = {
   ).isRequired,
 };
 
-export default PostReader;
+export default Reader;

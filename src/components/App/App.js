@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from './App.module.css';
-import PostReader from '../PostReader/PostReader';
+import Reader from '../Reader/Reader';
 
-import publications from '../PostReader/publications.json';
+import publications from '../Reader/publications.json';
 
 const App = () => {
   return (
     <div className={styles.container}>
-      <PostReader items={publications} />
+      <Reader items={publications} />
     </div>
   );
 };
