@@ -6,28 +6,20 @@ import Counter from '../Counter/Counter';
 import Controls from '../Controls/Controls';
 
 class Reader extends PureComponent {
-  constructor({ items }) {
-    super({ items });
-    this.state = {
-      publication: 0,
-      currentPage: 1,
-      pagerMax: items.length,
-    };
-  }
+  state = {
+    currentPage: 0,
+  };
 
-  handleNext = () => {
-    const { pagerMax, currentPage } = this.state;
-    if (currentPage < pagerMax) {
+  handleButtonClick = ({ target }) => {
+    const { name } = target;
+    const { items } = this.props;
+    const { currentPage } = this.state;
+    if (name === 'Next' && currentPage !== items.length) {
       this.setState(prev => ({
-        publication: prev.publication + 1,
         currentPage: prev.currentPage + 1,
       }));
     }
-  };
-
-  handlePrevious = () => {
-    const { currentPage } = this.state;
-    if (currentPage > 1) {
+    if (name === 'Previous' && currentPage > 0) {
       this.setState(prev => ({
         publication: prev.publication - 1,
         currentPage: prev.currentPage - 1,
@@ -37,28 +29,26 @@ class Reader extends PureComponent {
 
   render() {
     const { items } = this.props;
-    const { pagerMax, currentPage, publication } = this.state;
+    const { currentPage } = this.state;
     return (
       <div className={styles.reader}>
         <Publication
           cls={styles.publication}
-          items={items}
-          publication={publication}
+          publication={items[currentPage]}
         />
 
         <Counter
           cls={styles.counter}
-          currentPage={currentPage}
-          pagerMax={pagerMax}
+          currentPage={currentPage + 1}
+          pagerMax={items.length}
         />
 
         <Controls
           cls={styles.controls}
           clsbtn={styles.button}
-          handlePrevious={this.handlePrevious}
-          handleNext={this.handleNext}
-          currentPage={currentPage}
-          pagerMax={pagerMax}
+          onButtonClick={this.handleButtonClick}
+          currentPage={currentPage + 1}
+          pagerMax={items.length}
         />
       </div>
     );

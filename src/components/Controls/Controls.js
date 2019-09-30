@@ -1,28 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Controls = ({
-  cls,
-  clsbtn,
-  handlePrevious,
-  handleNext,
-  currentPage,
-  pagerMax,
-}) => (
+const Controls = ({ cls, clsbtn, onButtonClick, currentPage, pagerMax }) => (
   <section className={cls}>
     <button
       type="button"
       className={clsbtn}
-      onClick={handlePrevious}
+      onClick={onButtonClick}
       disabled={currentPage === 1}
+      name="Previous"
     >
       Previous
     </button>
     <button
       type="button"
       className={clsbtn}
-      onClick={handleNext}
+      onClick={onButtonClick}
       disabled={currentPage === pagerMax}
+      name="Next"
     >
       Next
     </button>
@@ -32,8 +27,7 @@ const Controls = ({
 Controls.propTypes = {
   cls: PropTypes.string.isRequired,
   clsbtn: PropTypes.string.isRequired,
-  handlePrevious: PropTypes.func.isRequired,
-  handleNext: PropTypes.func.isRequired,
+  onButtonClick: PropTypes.func.isRequired,
   currentPage: PropTypes.number,
   pagerMax: PropTypes.number.isRequired,
 };
