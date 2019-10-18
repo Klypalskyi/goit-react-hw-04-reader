@@ -4,14 +4,16 @@
   "private": true,
   "dependencies": {
     "gh-pages": "^2.1.1",
+    "query-string": "^6.8.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.1.1",
     "styled-components": "^4.3.2"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build && mv build/index.html build/200.html",
+    "deploy": "surge -p build -d goit-react-hw-04-reader.surge.sh",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -46,6 +48,5 @@
     "lint-staged": "^9.2.5",
     "prettier": "^1.18.2",
     "prop-types": "^15.7.2"
-  },
-  "homepage": "https://klypalskyi.github.io/goit-react-hw-02-reader/"
+  }
 }

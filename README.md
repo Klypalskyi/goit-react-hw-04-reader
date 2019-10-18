@@ -1,4 +1,4 @@
-## App
+## App with Surge hosting
 
 To see this App at Github Pages, just follow
-[this link](https://klypalskyi.github.io/goit-react-hw-02-reader).
+[this link](https://goit-react-hw-04-reader.surge.sh).
